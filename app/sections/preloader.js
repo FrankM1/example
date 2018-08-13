@@ -1,20 +1,12 @@
 
 var config = require('./config');
-
 var utils = require('./utils');
-
 var domCreateElement = require('dom-create-element');
-
 var domClasses = require('dom-classes');
-
 var queryDomComponents = require('query-dom-components');
-
 var pleaseAjax = require('please-ajax');
-
 var componentsMenu = require('./components/menu');
-
 var componentsSvg = require('./components/svg');
-
 var underscore = require('underscore');
 
 TweenLite.defaultEase = Expo.easeOut;
@@ -29,8 +21,6 @@ function Preloader() {
     this.pos = { x: 0, y: 0 };
     this.template = config.PATH + config.BASE + 'templates/components/' + this.slug + '.html';
     this.preloaded = onComplete;
-
-    console.log( this );
 }
 
 Preloader.prototype = {
