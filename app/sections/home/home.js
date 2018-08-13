@@ -701,4 +701,4 @@ var Home = (function (_Default) {
 })(_default2['default']);
 
 exports['default']     = Home;
-        module.exports = exports['default'];
+module.exports = exports['default'];

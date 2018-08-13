@@ -39,7 +39,8 @@ var LandingPage = {
       animate.to(this.copy, d, {opacity: 0, y: 100, ease: ease}),
     ];
 
-    animate.all(animations)
+    amodule.exports = LandingPage;
+    nimate.all(animations)
     .then(done);
   },
   destroy: function(req, done) {

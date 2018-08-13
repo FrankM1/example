@@ -1,37 +1,28 @@
 'use strict';
-var domready  = require('detect-dom-ready');
-var bigwheel  = require('bigwheel');
-var select    = require('dom-select');
-var HBSPlugin = require('./com/plugins/HBSPlugin');
+var domready = require('detect-dom-ready');
 
+var app = function () {
 
-var nav      = require('./ui/nav');
-var landing  = require( './sections/landing/' );
-var home     = require( './sections/home/home' );
-var docs     = require( './sections/docs/' );
-var issues   = require( './sections/issues/' );
-var notfound = require( './sections/notfound/' );
-
-var app = function(){
-  var framework = bigwheel( function(done) {
-    done({
-      overlap: false,
-      routes : {
-        '/'      : [ nav, landing ],
-        '/home'  : [ nav, home ],
-        '/docs'  : [ nav, docs ],
-        '/issues': [ nav, issues ],
-        '404'    : [ nav, notfound ]
-      }
-    });
-  });
+  var Jquery = require('jquery');
+  var select = require('dom-select');
+  var framework = require('./sections/framework');
+  var sniffer = require('./sections/sniffer');
+  var HBSPlugin = require('./com/plugins/HBSPlugin');
+  var nav      = require('./ui/nav');
 
   HBSPlugin.setup(select('#container'));
 
   nav.setFramework(framework);
+
+  window.$ = Jquery;
+
+  sniffer.addClasses(document.documentElement);
+  console.log(document.documentElement.className);
+  window.device = document.documentElement.className;
+
   framework.init();
 }
 
-domready(function() {
+domready(function () {
   new app();
 });

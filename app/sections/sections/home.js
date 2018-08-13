@@ -14,10 +14,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _framework = require('../framework');
-
-var _framework2 = _interopRequireDefault(_framework);
-
 var _config = require('../config');
 
 var _config2 = _interopRequireDefault(_config);
@@ -25,10 +21,6 @@ var _config2 = _interopRequireDefault(_config);
 var _utils = require('../utils');
 
 var _utils2 = _interopRequireDefault(_utils);
-
-var _gsap = require('gsap');
-
-var _gsap2 = _interopRequireDefault(_gsap);
 
 var _domClasses = require('dom-classes');
 
@@ -76,36 +68,36 @@ var Home = (function (_Default) {
 
         this.createExtraBound();
 
-        this.slug = 'cases';
-        this.page = null;
-        this.ui = null;
-        this.sp = null;
-        this.smooth = null;
+        this.slug         = 'cases';
+        this.page         = null;
+        this.ui           = null;
+        this.sp           = null;
+        this.smooth       = null;
         this.indexCurrent = 0;
-        this.cases = '';
+        this.cases        = '';
 
         this.ww = window.innerWidth;
         this.wh = window.innerHeight;
 
-        this.ready = false;
+        this.ready   = false;
         this.arrowTL = null;
 
         this.caseAnimationLeft = 0;
-        this.prevCases = 0;
-        this.nextCases = 0;
-        this.scrollWidth = 0;
-        this.speed = 1;
-        this.ease = Expo.easeInOut;
+        this.prevCases         = 0;
+        this.nextCases         = 0;
+        this.scrollWidth       = 0;
+        this.speed             = 1;
+        this.ease              = Expo.easeInOut;
 
         this.isInitial = window.prevRoute == undefined;
 
-        this.isPrevWork = window.prevRoute && window.prevRoute.slug == '/case';
-        this.isPrevSingle = window.prevRoute && window.prevRoute.url != '/case' && window.prevRoute.slug.indexOf('case/') !== -1;
+        this.isPrevWork      = window.prevRoute && window.prevRoute.slug == '/case';
+        this.isPrevSingle    = window.prevRoute && window.prevRoute.url != '/case' && window.prevRoute.slug.indexOf('case/') !== -1;
         this.singlePrevRoute = window.prevRoute && window.prevRoute.url != '/case' && window.prevRoute.slug.indexOf('case/') !== -1 ? 'case/' + window.prevRoute.url : false;
     }
 
     _createClass(Home, [{
-        key: 'createExtraBound',
+        key  : 'createExtraBound',
         value: function createExtraBound() {
             var _this = this;
 
@@ -114,13 +106,13 @@ var Home = (function (_Default) {
             });
         }
     }, {
-        key: 'init',
+        key  : 'init',
         value: function init(req, done) {
 
             _get(Object.getPrototypeOf(Home.prototype), 'init', this).call(this, req, done);
         }
     }, {
-        key: 'dataAdded',
+        key  : 'dataAdded',
         value: function dataAdded(done) {
 
             _get(Object.getPrototypeOf(Home.prototype), 'dataAdded', this).call(this);
@@ -148,7 +140,7 @@ var Home = (function (_Default) {
             // }
         }
     }, {
-        key: 'addEvents',
+        key  : 'addEvents',
         value: function addEvents() {
 
             if (this.isPrevSingle) {
@@ -164,15 +156,15 @@ var Home = (function (_Default) {
             window.addEventListener('orientationchange', this.onOrientationChange);
         }
     }, {
-        key: 'onOrientationChange',
+        key  : 'onOrientationChange',
         value: function onOrientationChange() {
 
             switch (window.orientation) {
-                case -90:
-                case 90:
+                case -90: 
+                case 90 : 
                     // to landscape, do nothing
                     break;
-                default:
+                default: 
                     // to portrait
                     // trigger scroll to reset position when at the end
                     _config2['default'].$body.scrollLeft = _config2['default'].$body.scrollLeft;
@@ -180,7 +172,7 @@ var Home = (function (_Default) {
             }
         }
     }, {
-        key: 'setParallaxStart',
+        key  : 'setParallaxStart',
         value: function setParallaxStart() {
 
             if (this.ww > 640 && !_config2['default'].isMobile && !_config2['default'].isTablet) {
@@ -191,7 +183,7 @@ var Home = (function (_Default) {
             }
         }
     }, {
-        key: 'scaleThumbs',
+        key  : 'scaleThumbs',
         value: function scaleThumbs() {
 
             for (var i = 0; i < this.cases.length; i++) {
@@ -202,7 +194,7 @@ var Home = (function (_Default) {
             }
         }
     }, {
-        key: 'removeEvents',
+        key  : 'removeEvents',
         value: function removeEvents() {
 
             (0, _jquery2['default'])('.round-next').addClass('stop-animate');
@@ -210,7 +202,7 @@ var Home = (function (_Default) {
             window.removeEventListener('orientationchange', this.onOrientationChange);
         }
     }, {
-        key: 'setContainerOffset',
+        key  : 'setContainerOffset',
         value: function setContainerOffset(percent, animate) {
             this.container.removeClass("animate");
 
@@ -228,17 +220,17 @@ var Home = (function (_Default) {
             }
         }
     }, {
-        key: 'initSmooth',
+        key  : 'initSmooth',
         value: function initSmooth(offset) {
 
             var smooth = this.smooth = new _libSmoothHome2['default']({
-                forceVS: true,
-                length: (0, _jquery2['default'])('.item-view').length,
-                section: this.page.querySelector('.section'),
-                cases: (0, _jquery2['default'])('.item-bg'),
+                forceVS  : true,
+                length   : (0, _jquery2['default'])('.item-view').length,
+                section  : this.page.querySelector('.section'),
+                cases    : (0, _jquery2['default'])('.item-bg'),
                 direction: 'horizontal',
-                ease: .1,
-                current: offset
+                ease     : .1,
+                current  : offset
             });
 
             this.smooth.init();
@@ -246,7 +238,7 @@ var Home = (function (_Default) {
             // this.scrollWidth = $('.scroll-view').width();
         }
     }, {
-        key: 'slideTo',
+        key  : 'slideTo',
         value: function slideTo(e) {
 
             e.stopPropagation();
@@ -254,7 +246,7 @@ var Home = (function (_Default) {
             if ((0, _jquery2['default'])(e.currentTarget).hasClass('is-disabled')) return;
 
             var target = e.currentTarget;
-            var dir = target.getAttribute('data-dir');
+            var dir    = target.getAttribute('data-dir');
 
             if (this.ww < 640 && this.indexCurrent == 0 && dir == 'left') return;
             if (this.ww < 640 && this.indexCurrent == this.cases.length - 1 && dir == 'right') return;
@@ -278,7 +270,7 @@ var Home = (function (_Default) {
 
                     if (dir == 'right') {
                         for (var i = this.cases.length - 1; i > -1; i--) {
-                            var left = this.cases[i].getBoundingClientRect().left;
+                            var left   = this.cases[i].getBoundingClientRect().left;
                             var offset = (0, _jquery2['default'])(this.cases[i]).offset().left;
 
                             if (left > this.ww * 0.667 + 100) {
@@ -287,7 +279,7 @@ var Home = (function (_Default) {
                         }
                     } else {
                         for (var i = 0; i < this.cases.length; i++) {
-                            var left = this.cases[i].getBoundingClientRect().left;
+                            var left   = this.cases[i].getBoundingClientRect().left;
                             var offset = (0, _jquery2['default'])(this.cases[i]).offset().left;
 
                             if (left < -this.ww * 0.667 - 100) {
@@ -322,25 +314,25 @@ var Home = (function (_Default) {
         // }
 
     }, {
-        key: 'switchArrows',
+        key  : 'switchArrows',
         value: function switchArrows(state) {
             if (state == 'kill') (0, _jquery2['default'])('.round:not(.round-back)').addClass('hidden');
             if (state == 'revive') (0, _jquery2['default'])('.round:not(.round-back)').removeClass('hidden');
         }
     }, {
-        key: 'arrowAnimation',
+        key  : 'arrowAnimation',
         value: function arrowAnimation() {
             this.arrowTL = new TimelineMax({ repeat: -1 }).set('.js-nextProject', { xPercent: -180 }).to('.animation-arrow', .4, { xPercent: 180, transformOrigin: "left", ease: Expo.easeIn }, 1).to('.animation-arrow__line', .4, { xPercent: 200, ease: Expo.easeIn }, 1.04).to('.js-nextProject', .4, { xPercent: 0, ease: Expo.easeOut }, 1.4).set('.animation-arrow, .animation-arrow__line', { display: 'none' }, 1.8).call(this.loopCheck);
         }
     }, {
-        key: 'loopCheck',
+        key  : 'loopCheck',
         value: function loopCheck() {
             if ((0, _jquery2['default'])('.round-next').hasClass('stop-animate')) {
                 this.arrowTL.pause();
             }
         }
     }, {
-        key: 'animateIn',
+        key  : 'animateIn',
         value: function animateIn(req, done) {
             var _this2 = this;
 
@@ -358,13 +350,13 @@ var Home = (function (_Default) {
 
             if (this.isPrevSingle) {
 
-                var offset = 0;
-                var columns = 3;
+                var offset              = 0;
+                var columns             = 3;
                 var caseAnimationOffset = 0;
 
                 var current = (0, _jquery2['default'])('.js-els[data-slug="' + window.prevRoute.url + '"]');
-                var index = this.indexCurrent = current.attr('data-item');
-                var titles = current.find('.work-details');
+                var index   = this.indexCurrent = current.attr('data-item');
+                var titles  = current.find('.work-details');
 
                 (0, _jquery2['default'])('.caseAnimation').removeClass('animate-in');
                 (0, _jquery2['default'])('.caseAnimation__inner .work-details').remove();
@@ -383,8 +375,8 @@ var Home = (function (_Default) {
 
                         //calculate thumbnail position
                         //1st project: left. last project: right. else center
-                        offset = _this2.wh * 0.4 * index - _this2.wh * 0.4;
-                        offset = index == _this2.cases.length - 1 ? offset - _this2.wh * 0.4 : index == 0 ? 0 : offset;
+                        offset              = _this2.wh * 0.4 * index - _this2.wh * 0.4;
+                        offset              = index == _this2.cases.length - 1 ? offset - _this2.wh * 0.4 : index == 0 ? 0 : offset;
                         caseAnimationOffset = index == 0 ? 0 : index == _this2.cases.length - 1 ? _this2.wh * 0.4 * 2 : _this2.wh * 0.4;
                         caseAnimationOffset = caseAnimationOffset - _this2.wh * 0.4;
 
@@ -425,9 +417,9 @@ var Home = (function (_Default) {
 
                         //calculate thumbnail position
                         //1st project: left. last project: right. else center
-                        offset = _this2.ww / 3 * index - _this2.ww / 3;
-                        offset = index == _this2.cases.length - 1 ? offset - _this2.ww / 3 : index == 0 ? 0 : offset;
-                        caseAnimationOffset = index == 0 ? 0 : index == _this2.cases.length - 1 ? _this2.ww / 3 * 2 : _this2.ww / 3;
+                        offset               = _this2.ww / 3 * index - _this2.ww / 3;
+                        offset               = index == _this2.cases.length - 1 ? offset - _this2.ww / 3 : index == 0 ? 0 : offset;
+                        caseAnimationOffset  = index == 0 ? 0 : index == _this2.cases.length - 1 ? _this2.ww / 3 * 2 : _this2.ww / 3;
                         caseAnimationOffset -= 1;
 
                         //calculate scroll position
@@ -463,8 +455,8 @@ var Home = (function (_Default) {
                             center = (current.find('.work-thumbs__inner').attr('data-centerset') * -1 + 100) * 0.667;
 
                             if (_this2.smooth) {
-                                var parallaxOffset = current.find('.work-thumbs')[0]._gsTransform.x / _this2.ww * 100;
-                                center += parallaxOffset;
+                                var parallaxOffset  = current.find('.work-thumbs')[0]._gsTransform.x / _this2.ww * 100;
+                                    center         += parallaxOffset;
                             }
                             tl.to('.caseAnimation__img', _this2.speed, { xPercent: center, scale: 0.667, ease: _this2.ease }, 0);
                         }
@@ -514,7 +506,7 @@ var Home = (function (_Default) {
             _utils2['default'].biggie.setPrevRoute(req);
         }
     }, {
-        key: 'animateOut',
+        key  : 'animateOut',
         value: function animateOut(req, done) {
             var _this3 = this;
 
@@ -531,13 +523,13 @@ var Home = (function (_Default) {
                 var columns = 3;
 
                 var reqCase = (0, _jquery2['default'])('.item-view[data-slug="' + req.params.id + '"]');
-                var img = reqCase.find('.work-thumbs__inner').css('background-image');
+                var img     = reqCase.find('.work-thumbs__inner').css('background-image');
                 var img_pos = reqCase.find('.work-thumbs__inner').css('background-position');
-                var titles = reqCase.find('.work-details');
+                var titles  = reqCase.find('.work-details');
 
                 this.caseAnimationLeft = reqCase[0].getBoundingClientRect().left;
-                this.prevCases = reqCase.prevAll();
-                this.nextCases = reqCase.nextAll();
+                this.prevCases         = reqCase.prevAll();
+                this.nextCases         = reqCase.nextAll();
 
                 //set animation cover image and details
                 (0, _jquery2['default'])('.caseAnimation__img').css({ 'background-image': img, 'background-position': img_pos });
@@ -556,8 +548,8 @@ var Home = (function (_Default) {
                         var scale = _this3.ww < 1024 ? 0.8 : 0.667;
 
                         if (_this3.ww >= 1024 && _this3.smooth) {
-                            var parallaxOffset = reqCase.find('.work-thumbs')[0]._gsTransform.x / _this3.ww * 100;
-                            center += parallaxOffset;
+                            var parallaxOffset  = reqCase.find('.work-thumbs')[0]._gsTransform.x / _this3.ww * 100;
+                                center         += parallaxOffset;
                         }
 
                         tl.set('.caseAnimation__img', { scale: scale, xPercent: center }, 0);
@@ -600,7 +592,7 @@ var Home = (function (_Default) {
                         center = reqCase.find('.work-thumbs__inner').attr('data-centerset');
 
                         center = _this3.mapRange([0, 100], [0, -60], center);
-                        top = reqCase[0].getBoundingClientRect().top - reqCase.height();
+                        top    = reqCase[0].getBoundingClientRect().top - reqCase.height();
 
                         tl.set('.caseAnimation', { y: top }, 0);
 
@@ -643,12 +635,12 @@ var Home = (function (_Default) {
             tl.restart();
         }
     }, {
-        key: 'mapRange',
+        key  : 'mapRange',
         value: function mapRange(from, to, s) {
             return to[0] + (s - from[0]) * (to[1] - to[0]) / (from[1] - from[0]);
         }
     }, {
-        key: 'resize',
+        key  : 'resize',
         value: function resize(width, height) {
             var _this4 = this;
 
@@ -662,15 +654,15 @@ var Home = (function (_Default) {
             this.scaleThumbs();
 
             for (var i = 0; i < this.ui.details.length; i++) {
-                var detail = this.ui.details[i];
-                var title = detail.querySelector('h1');
+                var detail         = this.ui.details[i];
+                var title          = detail.querySelector('h1');
                 var excerpt_height = detail.querySelector('.work-details__excerpt').clientHeight;
                 (0, _domCss2['default'])(title, { 'transform': 'translateY(' + excerpt_height + 'px)' });
             }
 
             // section should be divisible by 3
-            var wwMod = this.ww % 3;
-            var sectionWidth = (wwMod == 0 ? this.ww : this.ww + (3 - wwMod)) + "px"; // round to nearest 3
+            var wwMod        = this.ww % 3;
+            var sectionWidth = (wwMod == 0 ? this.ww : this.ww + (3 - wwMod)) + "px";  // round to nearest 3
 
             if (_utils2['default'].js.crossBorder(640) === 'under') {
                 this.smooth && (this.smooth.destroy(), this.smooth = null);
@@ -697,7 +689,7 @@ var Home = (function (_Default) {
             }
         }
     }, {
-        key: 'destroy',
+        key  : 'destroy',
         value: function destroy(req, done) {
             var _this5 = this;
 
@@ -716,5 +708,5 @@ var Home = (function (_Default) {
     return Home;
 })(_default2['default']);
 
-exports['default'] = Home;
-module.exports = exports['default'];
+exports['default']     = Home;
+        module.exports = exports['default'];
