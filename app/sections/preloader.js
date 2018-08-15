@@ -24,7 +24,7 @@ function Preloader() {
 }
 
 Preloader.prototype = {
-    init: function(req, done) {
+    init: function (req, done) {
         var self = this;
 
         this.svg = new componentsSvg();
@@ -32,21 +32,31 @@ Preloader.prototype = {
 
         this.createDOM();
 
-        done();
+        // done();
 
-        // pleaseAjax.get(this.template, {
-        //     success: function success(object) {
-        //         self.el.innerHTML = object.data;
-        //         self.dataAdded();
-        //         done();
-        //     }
-        // });
+        pleaseAjax.get(this.template, {
+            success: function success(object) {
+                self.el.innerHTML = object.data;
+                self.dataAdded();
+                done();
+            }
+        });
     },
 
-    createDOM: function() {
+    detect: function () {
+
+        this.isMobile = config.isMobile = config.width >= 769 ? false : true;
+        // this.isMobile && classes.add(config.$body, 'is-mobile');
+
+        config.UA = navigator.userAgent;
+
+        !this.isMobile && domClasses.add(config.$body, 'has-vh-units');
+    },
+
+    createDOM: function () {
 
         var page = this.view.firstChild;
-        console.log( page );
+        console.log(page);
 
         this.el = domCreateElement({
             selector: 'div',
@@ -66,10 +76,10 @@ Preloader.prototype = {
         this.ui = queryDomComponents({ el: this.el });
     },
 
-    resize: function(width, height) {
+    resize: function (width, height) {
     },
 
-    animateIn: function(req, done) {
+    animateIn: function (req, done) {
         var tl = new TimelineMax({ paused: true, onComplete: done });
         tl.to(this.ui.logo, 2, { opacity: 1 }, 0.1);
         tl.staggerTo(this.ui.letter, 1.1, { y: '0%', ease: Expo.easeOut }, 0.01, 0);
@@ -79,7 +89,7 @@ Preloader.prototype = {
         this.isMobile && omponentsLogo.animateIn();
     },
 
-    animateOut: function(req, done) {
+    animateOut: function (req, done) {
         var images = window.$('.work-thumbs__inner');
         var l = images.length;
         var render = underscore.after(l, done);
@@ -93,16 +103,18 @@ Preloader.prototype = {
         }
     },
 
-    destroy: function(req, done) {
+    destroy: function (req, done) {
         var self = this;
 
         this.menu.showDOM();
 
-        var tl = new TimelineMax({ paused: true, onComplete: function onComplete() {
+        var tl = new TimelineMax({
+            paused: true, onComplete: function onComplete() {
                 domClasses.add(config.$body, 'preloaded');
                 self.view.removeChild(self.el);
                 done();
-            } });
+            }
+        });
 
         tl.staggerTo(this.ui.letter, 1.5, { x: '100%', ease: Power4.easeInOut, clearProps: 'all' }, -0.005, 0);
         tl.staggerTo(this.ui.bg, 1.1, { x: '101%', ease: Power4.easeInOut }, 0.08, .6);

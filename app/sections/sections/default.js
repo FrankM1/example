@@ -22,7 +22,7 @@ function Default(opt) {
 Default.prototype = {
     init: function(req, done) {
         var view = this.view;
-        
+
         this.page = window.prevRoute ? utils.biggie.loadHTML(req, view, this.dataAdded.bind(this, done)) : (0, domSelect)('#js-page-' + this.slug);
 
         if (!window.prevRoute) {

@@ -6,21 +6,10 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _domSelect = require('dom-select');
+var domSelect = require('dom-select');
+var prefix = require('prefix');
 
-var _domSelect2 = _interopRequireDefault(_domSelect);
-
-var _utils = require('./utils');
-
-var _utils2 = _interopRequireDefault(_utils);
-
-var _prefix = require('prefix');
-
-var _prefix2 = _interopRequireDefault(_prefix);
-
-var _jquery = require('jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
+var jquery = require('jquery');
 
 var config = {
 
@@ -29,15 +18,15 @@ var config = {
 
 	$body: document.body,
 	$html: document.documentElement,
-	$view: (0, _domSelect2['default'])('#js-view'),
+	$view: domSelect('#js-view'),
 
 	width: window.innerWidth,
 	height: window.innerHeight,
 
-	isMobile: (0, _jquery2['default'])('html').hasClass('is-phone'),
-	isTablet: (0, _jquery2['default'])('html').hasClass('is-tablet'),
+	isMobile: jquery('html').hasClass('is-phone'),
+	isTablet: jquery('html').hasClass('is-tablet'),
 
-	prefix: (0, _prefix2['default'])('transform')
+	prefix: prefix('transform')
 
 };
 

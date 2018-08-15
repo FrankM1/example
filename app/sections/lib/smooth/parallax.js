@@ -18,10 +18,6 @@ var _smooth = require('./smooth');
 
 var _smooth2 = _interopRequireDefault(_smooth);
 
-var _config = require('../../config');
-
-var _config2 = _interopRequireDefault(_config);
-
 var _utils = require('../../utils');
 
 var _utils2 = _interopRequireDefault(_utils);
@@ -29,10 +25,6 @@ var _utils2 = _interopRequireDefault(_utils);
 var _domClasses = require('dom-classes');
 
 var _domClasses2 = _interopRequireDefault(_domClasses);
-
-var _domEvents = require('dom-events');
-
-var _domEvents2 = _interopRequireDefault(_domEvents);
 
 var _domCss = require('dom-css');
 

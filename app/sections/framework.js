@@ -8,6 +8,7 @@ var home = require('./home/home');
 var docs = require('./docs/');
 var issues = require('./issues/');
 var notfound = require('./notfound/');
+var preloader = require('./preloader')();
 
 router.addRoute('/', [nav, home] );
 router.addRoute('/landing', [nav, landing] );
@@ -18,7 +19,7 @@ router.addRoute('404', [nav, notfound] );
 var framework = bigwheel(function (done) {
 	done({
 		overlap: false,
-		//initSection: require('./preloader'),
+		initSection: preloader,
 		routes: router.routeMap
 	});
 });
