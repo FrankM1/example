@@ -21,8 +21,10 @@ var app = function () {
   window.device = document.documentElement.className;
 
   framework.init();
+
+  return framework;
 }
 
 domready(function () {
-  new app();
+  window.app = new app();
 });

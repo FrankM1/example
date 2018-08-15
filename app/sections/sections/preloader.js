@@ -6,65 +6,21 @@ Object.defineProperty(exports, '__esModule', {
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var _config = require('../config');
+var config = require('../config');
+var utils = require('../utils');
 
-var _config2 = _interopRequireDefault(_config);
+var domCreateElement = require('dom-create-element');
+var domClasses = require('dom-classes');
+var queryDomComponents = require('query-dom-components');
+var pleaseAjax = require('please-ajax');
+var underscore = require('underscore');
 
-var _utils = require('../utils');
+var componentsLogo = require('../components/logo');
+var componentsMenu = require('../components/menu');
+var componentsSvg = require('../components/svg');
 
-var _utils2 = _interopRequireDefault(_utils);
-
-var _gsap = require('gsap');
-
-var _gsap2 = _interopRequireDefault(_gsap);
-
-var _domCreateElement = require('dom-create-element');
-
-var _domCreateElement2 = _interopRequireDefault(_domCreateElement);
-
-var _domClasses = require('dom-classes');
-
-var _domClasses2 = _interopRequireDefault(_domClasses);
-
-var _domCss = require('dom-css');
-
-var _domCss2 = _interopRequireDefault(_domCss);
-
-var _queryDomComponents = require('query-dom-components');
-
-var _queryDomComponents2 = _interopRequireDefault(_queryDomComponents);
-
-var _pleaseAjax = require('please-ajax');
-
-var _pleaseAjax2 = _interopRequireDefault(_pleaseAjax);
-
-var _libSpanify = require('../lib/spanify');
-
-var _libSpanify2 = _interopRequireDefault(_libSpanify);
-
-var _componentsLogo = require('../components/logo');
-
-var _componentsLogo2 = _interopRequireDefault(_componentsLogo);
-
-var _componentsMenu = require('../components/menu');
-
-var _componentsMenu2 = _interopRequireDefault(_componentsMenu);
-
-var _componentsSvg = require('../components/svg');
-
-var _componentsSvg2 = _interopRequireDefault(_componentsSvg);
-
-var _jquery = require('jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _underscore = require('underscore');
-
-var _underscore2 = _interopRequireDefault(_underscore);
 
 TweenLite.defaultEase = Expo.easeOut;
 
@@ -74,13 +30,13 @@ var Preloader = (function () {
 
 		this.detect();
 
-		this.view = _config2['default'].$view;
+		this.view = config.$view;
 		this.slug = 'preloader';
 		this.el = null;
 		this.menu = null;
 		this.svg = null;
 		this.pos = { x: 0, y: 0 };
-		this.template = _config2['default'].PATH + _config2['default'].BASE + 'templates/components/' + this.slug + '.html';
+		this.template = config.PATH + config.BASE + 'templates/components/' + this.slug + '.html';
 		this.preloaded = onComplete;
 	}
 
@@ -88,24 +44,24 @@ var Preloader = (function () {
 		key: 'detect',
 		value: function detect() {
 
-			this.isMobile = _config2['default'].isMobile = _config2['default'].width >= 769 ? false : true;
+			this.isMobile = config.isMobile = config.width >= 769 ? false : true;
 			// this.isMobile && classes.add(config.$body, 'is-mobile');
 
-			_config2['default'].UA = navigator.userAgent;
+			config.UA = navigator.userAgent;
 
-			!this.isMobile && _domClasses2['default'].add(_config2['default'].$body, 'has-vh-units');
+			!this.isMobile && domClasses.add(config.$body, 'has-vh-units');
 		}
 	}, {
 		key: 'init',
 		value: function init(req, done) {
 			var _this = this;
 
-			var svg = this.svg = new _componentsSvg2['default']();
-			var menu = this.menu = new _componentsMenu2['default']();
+			var svg = this.svg = new componentsSvg();
+			var menu = this.menu = new componentsMenu();
 
 			this.createDOM();
 
-			_pleaseAjax2['default'].get(this.template, {
+			pleaseAjax.get(this.template, {
 				success: function success(object) {
 					_this.el.innerHTML = object.data;
 					_this.dataAdded();
@@ -119,7 +75,7 @@ var Preloader = (function () {
 
 			var page = this.view.firstChild;
 
-			this.el = (0, _domCreateElement2['default'])({
+			this.el = domCreateElement({
 				selector: 'div',
 				styles: 'preloader'
 			});
@@ -135,7 +91,7 @@ var Preloader = (function () {
 				return char.innerHTML = '<div class="js-letter">' + char.innerHTML + '</div>';
 			});
 
-			this.ui = (0, _queryDomComponents2['default'])({ el: this.el });
+			this.ui = queryDomComponents({ el: this.el });
 		}
 	}, {
 		key: 'resize',
@@ -150,19 +106,19 @@ var Preloader = (function () {
 			tl.add(this.preloaded, 2);
 			tl.restart();
 
-			this.isMobile && _componentsLogo2['default'].animateIn();
+			this.isMobile && componentsLogo.animateIn();
 		}
 	}, {
 		key: 'animateOut',
 		value: function animateOut(req, done) {
 
-			var images = (0, _jquery2['default'])('.work-thumbs__inner');
+			var images = $('.work-thumbs__inner');
 			var l = images.length;
-			var render = _underscore2['default'].after(l, done);
+			var render = underscore.after(l, done);
 
 			if (images.length > 0) {
 				for (var i = 0; i < l; i++) {
-					_utils2['default'].js.loadImg(images[i].getAttribute('data-src'), render);
+					utils.js.loadImg(images[i].getAttribute('data-src'), render);
 				}
 			} else {
 				done();
@@ -176,7 +132,7 @@ var Preloader = (function () {
 			this.menu.showDOM();
 
 			var tl = new TimelineMax({ paused: true, onComplete: function onComplete() {
-					_domClasses2['default'].add(_config2['default'].$body, 'preloaded');
+					domClasses.add(config.$body, 'preloaded');
 					_this2.view.removeChild(_this2.el);
 					done();
 				} });

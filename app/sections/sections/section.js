@@ -14,10 +14,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _framework = require('../framework');
-
-var _framework2 = _interopRequireDefault(_framework);
-
 var _config = require('../config');
 
 var _config2 = _interopRequireDefault(_config);
@@ -26,25 +22,13 @@ var _utils = require('../utils');
 
 var _utils2 = _interopRequireDefault(_utils);
 
-var _gsap = require('gsap');
-
-var _gsap2 = _interopRequireDefault(_gsap);
-
 var _domClasses = require('dom-classes');
 
 var _domClasses2 = _interopRequireDefault(_domClasses);
 
-var _domEvents = require('dom-events');
-
-var _domEvents2 = _interopRequireDefault(_domEvents);
-
 var _queryDomComponents = require('query-dom-components');
 
 var _queryDomComponents2 = _interopRequireDefault(_queryDomComponents);
-
-var _domCreateElement = require('dom-create-element');
-
-var _domCreateElement2 = _interopRequireDefault(_domCreateElement);
 
 var _jquery = require('jquery');
 
@@ -53,10 +37,6 @@ var _jquery2 = _interopRequireDefault(_jquery);
 var _libSlider = require('../lib/slider');
 
 var _libSlider2 = _interopRequireDefault(_libSlider);
-
-var _libSpanify = require('../lib/spanify');
-
-var _libSpanify2 = _interopRequireDefault(_libSpanify);
 
 var _libSmoothSection = require('../lib/smooth/section');
 
@@ -74,18 +54,6 @@ var _hammerjs = require('hammerjs');
 
 var _hammerjs2 = _interopRequireDefault(_hammerjs);
 
-var _libGreenSockSrcMinifiedPluginsScrollToPluginMin = require('../lib/GreenSock/src/minified/plugins/ScrollToPlugin.min');
-
-var _libGreenSockSrcMinifiedPluginsScrollToPluginMin2 = _interopRequireDefault(_libGreenSockSrcMinifiedPluginsScrollToPluginMin);
-
-var _libGreenSockSrcUncompressedUtilsDraggable = require('../lib/GreenSock/src/uncompressed/utils/Draggable');
-
-var _libGreenSockSrcUncompressedUtilsDraggable2 = _interopRequireDefault(_libGreenSockSrcUncompressedUtilsDraggable);
-
-var _libGreenSockSrcUncompressedPluginsThrowPropsPlugin = require('../lib/GreenSock/src/uncompressed/plugins/ThrowPropsPlugin');
-
-var _libGreenSockSrcUncompressedPluginsThrowPropsPlugin2 = _interopRequireDefault(_libGreenSockSrcUncompressedPluginsThrowPropsPlugin);
-
 var _libGreenSockSrcUncompressedUtilsSplitText = require('../lib/GreenSock/src/uncompressed/utils/SplitText');
 
 var _libGreenSockSrcUncompressedUtilsSplitText2 = _interopRequireDefault(_libGreenSockSrcUncompressedUtilsSplitText);
@@ -93,10 +61,6 @@ var _libGreenSockSrcUncompressedUtilsSplitText2 = _interopRequireDefault(_libGre
 var _videoJs = require('video.js');
 
 var _videoJs2 = _interopRequireDefault(_videoJs);
-
-var _videojsVimeo = require('videojs-vimeo');
-
-var _videojsVimeo2 = _interopRequireDefault(_videojsVimeo);
 
 var Section = (function (_Default) {
 	_inherits(Section, _Default);
@@ -155,7 +119,7 @@ var Section = (function (_Default) {
 	}, {
 		key: 'dataAdded',
 		value: function dataAdded(done) {
-			var $single = (0, _jquery2['default'])(this.page).find('.work-single');
+			var $single = $(this.page).find('.work-single');
 			this.darkBackground = $single.data('dark');
 
 			_get(Object.getPrototypeOf(Section.prototype), 'dataAdded', this).call(this);
@@ -218,17 +182,17 @@ var Section = (function (_Default) {
 					this.rAF();
 				}
 
-			(0, _jquery2['default'])('.js-round').on('click', this.switchCase);
+			$('.js-round').on('click', this.switchCase);
 			// $('.round-back').off('click', this.goHome);
 			// $('.round-back').on('click', this.goHome);
 
-			(0, _jquery2['default'])(window).on('keydown', this.keyPressed);
-			if (!(0, _jquery2['default'])('.round-back').hasClass('stop-animate')) {
-				(0, _jquery2['default'])('.round-back').off('click', this.scrollDown);
-				(0, _jquery2['default'])('.round-back').on('click', this.scrollDown);
+			$(window).on('keydown', this.keyPressed);
+			if (!$('.round-back').hasClass('stop-animate')) {
+				$('.round-back').off('click', this.scrollDown);
+				$('.round-back').on('click', this.scrollDown);
 			} else {
-				(0, _jquery2['default'])('.round-back').off('click', this.goHome);
-				(0, _jquery2['default'])('.round-back').on('click', this.goHome);
+				$('.round-back').off('click', this.goHome);
+				$('.round-back').on('click', this.goHome);
 			}
 
 			this.readVerticalDragging();
@@ -239,17 +203,17 @@ var Section = (function (_Default) {
 		key: 'readVerticalDragging',
 		value: function readVerticalDragging() {
 
-			(0, _jquery2['default'])(window).on('touchstart', this.ontouchstart);
-			(0, _jquery2['default'])(window).on('touchmove', this.ontouchmove);
-			(0, _jquery2['default'])(window).on('touchend', this.ontouchend);
+			$(window).on('touchstart', this.ontouchstart);
+			$(window).on('touchmove', this.ontouchmove);
+			$(window).on('touchend', this.ontouchend);
 		}
 	}, {
 		key: 'unReadVerticalDragging',
 		value: function unReadVerticalDragging() {
 
-			(0, _jquery2['default'])(window).off('touchstart', this.ontouchstart);
-			(0, _jquery2['default'])(window).off('touchmove', this.ontouchmove);
-			(0, _jquery2['default'])(window).off('touchend', this.ontouchend);
+			$(window).off('touchstart', this.ontouchstart);
+			$(window).off('touchmove', this.ontouchmove);
+			$(window).off('touchend', this.ontouchend);
 		}
 	}, {
 		key: 'scrollDown',
@@ -269,11 +233,11 @@ var Section = (function (_Default) {
 	}, {
 		key: 'loopCheck',
 		value: function loopCheck() {
-			if ((0, _jquery2['default'])('.round-back').hasClass('stop-animate')) {
+			if ($('.round-back').hasClass('stop-animate')) {
 				this.arrowTL.pause();
-				(0, _jquery2['default'])('.round-back').removeClass('no-hover');
-				(0, _jquery2['default'])('.round-back').off('click', this.scrollDown);
-				(0, _jquery2['default'])('.round-back').on('click', this.goHome);
+				$('.round-back').removeClass('no-hover');
+				$('.round-back').off('click', this.scrollDown);
+				$('.round-back').on('click', this.goHome);
 			}
 		}
 	}, {
@@ -283,10 +247,10 @@ var Section = (function (_Default) {
 
 			this.videos = [];
 
-			(0, _jquery2['default'])(this.page).find('.video-js').each(function (i, videoEl) {
+			$(this.page).find('.video-js').each(function (i, videoEl) {
 
-				var $originalParent = (0, _jquery2['default'])(videoEl).parent();
-				var src = (0, _jquery2['default'])(videoEl).data('src');
+				var $originalParent = $(videoEl).parent();
+				var src = $(videoEl).data('src');
 
 				var videoInstance = (0, _videoJs2['default'])(videoEl, {
 					"controls": true,
@@ -330,7 +294,7 @@ var Section = (function (_Default) {
 		key: 'ontouchmove',
 		value: function ontouchmove(ev) {
 
-			if (!(0, _jquery2['default'])('body').hasClass('scroll-lock')) {
+			if (!$('body').hasClass('scroll-lock')) {
 				var touchMovedY = Math.abs(ev.originalEvent.touches[0].screenY - this.touchScreenY);
 				var touchMovedX = Math.abs(ev.originalEvent.touches[0].screenX - this.touchScreenX);
 
@@ -347,7 +311,7 @@ var Section = (function (_Default) {
 		key: 'goHome',
 		value: function goHome(e) {
 			e.preventDefault();
-			_framework2['default'].go((0, _jquery2['default'])(this).attr('data-href'));
+			app.go($(this).attr('data-href'));
 		}
 	}, {
 		key: 'handleHammer',
@@ -425,9 +389,9 @@ var Section = (function (_Default) {
 
 			// $('.js-round').off('mouseenter', this.mouseEnter);
 			// $('.js-round').off('mouseleave', this.mouseLeave);
-			(0, _jquery2['default'])('.js-round').off('click', this.switchCase);
-			(0, _jquery2['default'])('.video-wrap').off('click', this.controlVideo);
-			(0, _jquery2['default'])(window).off('keydown', this.keyPressed);
+			$('.js-round').off('click', this.switchCase);
+			$('.video-wrap').off('click', this.controlVideo);
+			$(window).off('keydown', this.keyPressed);
 			// $('.round-back').off('click', this.goHome);
 
 			this.unReadVerticalDragging();
@@ -454,8 +418,8 @@ var Section = (function (_Default) {
 				if (view.ww < 640) view.toggleButtons();
 
 				if (window.pageYOffset > view.wh) {
-					(0, _jquery2['default'])('.round-back').addClass('stop-animate');
-					(0, _jquery2['default'])('.round-back').removeClass('no-hover');
+					$('.round-back').addClass('stop-animate');
+					$('.round-back').removeClass('no-hover');
 				}
 			}
 
@@ -487,11 +451,11 @@ var Section = (function (_Default) {
 			// This is necessary so you never see what is "behind" the navbar.
 			if (st > this.lastScrollTop && st > 75) {
 				// Scroll Down
-				(0, _jquery2['default'])('.round').addClass('hidden');
+				$('.round').addClass('hidden');
 			} else {
 				// Scroll Up
-				if (st + (0, _jquery2['default'])(window).height() < (0, _jquery2['default'])(document).height()) {
-					(0, _jquery2['default'])('.round').removeClass('hidden');
+				if (st + $(window).height() < $(document).height()) {
+					$('.round').removeClass('hidden');
 				}
 			}
 
@@ -503,8 +467,8 @@ var Section = (function (_Default) {
 			var view = this;
 			console.log('section: addSlides()', '');
 
-			var p = (0, _jquery2['default'])(this.page).find('.slider-pantone');
-			var s = (0, _jquery2['default'])(this.page).find('.slider-screens');
+			var p = $(this.page).find('.slider-pantone');
+			var s = $(this.page).find('.slider-screens');
 
 			if (p) {
 				var slider = new _libSlider2['default']({
@@ -518,7 +482,7 @@ var Section = (function (_Default) {
 
 			if (s) {
 				_jquery2['default'].each(s, function (i, container) {
-					var width = (0, _jquery2['default'])(container)[0].querySelector('.slide').getBoundingClientRect().width;
+					var width = $(container)[0].querySelector('.slide').getBoundingClientRect().width;
 					// const parallax = classes.has( $(container)[0].querySelector('.slider-container'), 'parallax' );
 					// console.log(parallax);
 					var slider = new _libSlider2['default']({
@@ -545,22 +509,22 @@ var Section = (function (_Default) {
 	}, {
 		key: 'updateArrows',
 		value: function updateArrows() {
-			var el = (0, _jquery2['default'])(this.page).find('.work-single');
+			var el = $(this.page).find('.work-single');
 
 			if (el.attr('data-prev').length > 0) {
-				(0, _jquery2['default'])('.round-prev').removeClass('is-disabled');
+				$('.round-prev').removeClass('is-disabled');
 			} else {
-				(0, _jquery2['default'])('.round-prev').addClass('is-disabled');
+				$('.round-prev').addClass('is-disabled');
 			}
 
 			if (el.attr('data-next').length > 0) {
-				(0, _jquery2['default'])('.round-next').removeClass('is-disabled');
+				$('.round-next').removeClass('is-disabled');
 			} else {
-				(0, _jquery2['default'])('.round-next').addClass('is-disabled');
+				$('.round-next').addClass('is-disabled');
 			}
 
-			this.sideHref.right = (0, _jquery2['default'])(this.page).find('.project-side.right').attr('data-href');
-			this.sideHref.left = (0, _jquery2['default'])(this.page).find('.project-side.left').attr('data-href');
+			this.sideHref.right = $(this.page).find('.project-side.right').attr('data-href');
+			this.sideHref.left = $(this.page).find('.project-side.left').attr('data-href');
 		}
 
 		// mouseEnter(e) {
@@ -623,9 +587,9 @@ var Section = (function (_Default) {
 			// $('.js-round').off('mouseenter', this.mouseEnter);
 			// $('.js-round').off('mouseleave', this.mouseLeave);
 
-			var direction = e.currentTarget ? window.transitionProject = (0, _jquery2['default'])(e.currentTarget).attr('data-dir') : window.transitionProject = e;
-			if (direction == 'left') _framework2['default'].go(this.sideHref.left);
-			if (direction == 'right') _framework2['default'].go(this.sideHref.right);
+			var direction = e.currentTarget ? window.transitionProject = $(e.currentTarget).attr('data-dir') : window.transitionProject = e;
+			if (direction == 'left') app.go(this.sideHref.left);
+			if (direction == 'right') app.go(this.sideHref.right);
 		}
 	}, {
 		key: 'animateIn',
@@ -637,7 +601,7 @@ var Section = (function (_Default) {
 			_domClasses2['default'].add(_config2['default'].$body, 'is-' + this.slug);
 			_domClasses2['default'].add(this.ui.bg, 'is-ready');
 
-			(0, _jquery2['default'])('.round-back').removeClass('hidden');
+			$('.round-back').removeClass('hidden');
 
 			var firstRoute = typeof window.prevRoute === 'undefined';
 			var tl = new TimelineMax({ paused: true, onComplete: function onComplete() {
@@ -682,7 +646,7 @@ var Section = (function (_Default) {
 
 			if (!_config2['default'].isMobile) _componentsLogo2['default'].animateIn();
 
-			if (!(0, _jquery2['default'])('.round-back').hasClass('stop-animate')) this.animateArrow();
+			if (!$('.round-back').hasClass('stop-animate')) this.animateArrow();
 
 			_utils2['default'].biggie.setPrevRoute(req);
 		}
@@ -705,7 +669,7 @@ var Section = (function (_Default) {
 			_domClasses2['default'].remove(this.ui.bg, 'is-ready');
 			// classes.add(this.ui.nav, 'is-hidden-force');
 
-			if (!isNextSingle) (0, _jquery2['default'])('.round-back').addClass('hidden');
+			if (!isNextSingle) $('.round-back').addClass('hidden');
 
 			if (isNextSingle) {
 
@@ -727,7 +691,7 @@ var Section = (function (_Default) {
 					}
 
 					tl.to(this.page, 1.2, { xPercent: value, ease: Expo.easeInOut }, 0);
-					tl.to((0, _jquery2['default'])(this.page).find('.work-thumbs__inner'), 1.2, { xPercent: value * -0.5, ease: Expo.easeInOut }, 0);
+					tl.to($(this.page).find('.work-thumbs__inner'), 1.2, { xPercent: value * -0.5, ease: Expo.easeInOut }, 0);
 					tl.to(side, 1.5, { xPercent: 0, ease: Expo.easeInOut }, 0);
 					tl.to(side.querySelector('.project-side__img'), 1.2, { x: '0%', ease: Expo.easeInOut }, 0);
 
@@ -745,25 +709,25 @@ var Section = (function (_Default) {
 					}
 			} else if (req.route == '/cases') {
 
-				var img = (0, _jquery2['default'])('.work-thumbs__inner').css('background-image');
-				var img_pos = (0, _jquery2['default'])('.work-thumbs__inner').attr('data-centerset');
+				var img = $('.work-thumbs__inner').css('background-image');
+				var img_pos = $('.work-thumbs__inner').attr('data-centerset');
 				var delay = 0;
 
-				(0, _jquery2['default'])('.caseAnimation__img').css({ 'background-image': img, 'background-position': img_pos + '%' });
-				(0, _jquery2['default'])('.caseAnimation__inner .work-head').remove();
-				(0, _jquery2['default'])('.caseAnimation__inner .work-details').remove();
+				$('.caseAnimation__img').css({ 'background-image': img, 'background-position': img_pos + '%' });
+				$('.caseAnimation__inner .work-head').remove();
+				$('.caseAnimation__inner .work-details').remove();
 
 				var tl = new TimelineMax({ paused: true, onComplete: function onComplete() {
 						TweenMax.set('.caseAnimation, .caseAnimation__inner, .caseAnimation__img, .caseAnimation .work-details', { clearProps: 'transform' });
 						TweenMax.set('.caseAnimation', { display: 'block', yPercent: 0 });
-						(0, _jquery2['default'])('.caseAnimation__inner .work-head').remove();
+						$('.caseAnimation__inner .work-head').remove();
 
 						done();
 					} });
 
-				if (Math.abs(needsScrollTop) > (0, _jquery2['default'])('.work-thumbs__inner.single').height() + 100) {
-					var workhead = (0, _jquery2['default'])('.work-single .work-head.js-head');
-					(0, _jquery2['default'])(workhead).clone().appendTo('.caseAnimation__inner');
+				if (Math.abs(needsScrollTop) > $('.work-thumbs__inner.single').height() + 100) {
+					var workhead = $('.work-single .work-head.js-head');
+					$(workhead).clone().appendTo('.caseAnimation__inner');
 					tl.set('.caseAnimation__inner .work-head', { y: 0 });
 					tl.set('.caseAnimation', { display: 'block' }, 0);
 					this.split = new _libGreenSockSrcUncompressedUtilsSplitText2['default']('.caseAnimation__inner .work-head span', { type: "words,chars", position: "relative" });

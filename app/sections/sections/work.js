@@ -14,10 +14,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _framework = require('../framework');
-
-var _framework2 = _interopRequireDefault(_framework);
-
 var _config = require('../config');
 
 var _config2 = _interopRequireDefault(_config);
@@ -25,10 +21,6 @@ var _config2 = _interopRequireDefault(_config);
 var _utils = require('../utils');
 
 var _utils2 = _interopRequireDefault(_utils);
-
-var _gsap = require('gsap');
-
-var _gsap2 = _interopRequireDefault(_gsap);
 
 var _domClasses = require('dom-classes');
 
@@ -49,10 +41,6 @@ var _queryDomComponents2 = _interopRequireDefault(_queryDomComponents);
 var _libSmoothProjects = require('../lib/smooth/projects');
 
 var _libSmoothProjects2 = _interopRequireDefault(_libSmoothProjects);
-
-var _componentsLogo = require('../components/logo');
-
-var _componentsLogo2 = _interopRequireDefault(_componentsLogo);
 
 var _jquery = require('jquery');
 
@@ -271,7 +259,7 @@ var Work = (function (_Default) {
 			this.smooth && (this.smooth.destroy(), this.smooth = null);
 
 			var tl = new TimelineMax({ paused: true, onComplete: function onComplete() {
-					_framework2['default'].go(href);
+					app.go(href);
 				} });
 
 			tl.set(target, { zIndex: 5, overflow: 'inherit' });

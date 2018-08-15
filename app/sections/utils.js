@@ -4,27 +4,9 @@ Object.defineProperty(exports, '__esModule', {
 	value: true
 });
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _framework = require('./framework');
-
-var _framework2 = _interopRequireDefault(_framework);
-
-var _pleaseAjax = require('please-ajax');
-
-var _pleaseAjax2 = _interopRequireDefault(_pleaseAjax);
-
-var _domCreateElement = require('dom-create-element');
-
-var _domCreateElement2 = _interopRequireDefault(_domCreateElement);
-
-var _jquery = require('jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _underscore = require('underscore');
-
-var _underscore2 = _interopRequireDefault(_underscore);
+var pleaseAjax = require('please-ajax');
+var domCreateElement = require('dom-create-element');
+var underscore = require('underscore');
 
 window.cacheWidth = window.innerWidth;
 window.cacheTime = 0;
@@ -89,34 +71,34 @@ var Utils = {
 		},
 
 		lockScroll: function lockScroll() {
-			(0, _jquery2['default'])('body').addClass('scroll-lock');
+			$('body').addClass('scroll-lock');
 		},
 
 		unlockScroll: function unlockScroll() {
-			(0, _jquery2['default'])('body').removeClass('scroll-lock');
+			$('body').removeClass('scroll-lock');
 		},
 
 		lazyload: function lazyload() {
-			var images = (0, _jquery2['default'])('img');
-			_jquery2['default'].each(images, function () {
-				(0, _jquery2['default'])(this).attr('src', (0, _jquery2['default'])(this).attr('data-lazy'));
+			var images = $('img');
+			$.each(images, function () {
+				$(this).attr('src', $(this).attr('data-lazy'));
 			});
 
-			var videos = (0, _jquery2['default'])('source');
-			_jquery2['default'].each(videos, function (i) {
-				(0, _jquery2['default'])(this).attr('src', (0, _jquery2['default'])(this).attr('data-lazy'));
-				(0, _jquery2['default'])(this).parent().load();
+			var videos = $('source');
+			$.each(videos, function (i) {
+				$(this).attr('src', $(this).attr('data-lazy'));
+				$(this).parent().load();
 			});
 
-			var bgs = (0, _jquery2['default'])('.lazy-bg');
-			_jquery2['default'].each(bgs, function () {
-				(0, _jquery2['default'])(this).css({ 'background-image': 'url(' + (0, _jquery2['default'])(this).attr('data-lazy') + ')' });
+			var bgs = $('.lazy-bg');
+			$.each(bgs, function () {
+				$(this).css({ 'background-image': 'url(' + $(this).attr('data-lazy') + ')' });
 			});
 		},
 
 		loadImg: function loadImg(source, callback) {
 
-			(0, _jquery2['default'])('<img/>').load(_underscore2['default'].once(function (e) {
+			$('<img/>').load(underscore.once(function (e) {
 				typeof callback === 'function' && callback();
 			})).attr('src', source);
 		}
@@ -145,7 +127,7 @@ var Utils = {
 			// - add 'default' route case
 			if (route === "/") route = '/cases';
 			// - replace :id in route by the current section's id to get the template
-			// needs to be ':id' in routes.js
+			// needs to be ':id' in router.js
 			if (routeDuplicate) {
 				route = route.substring(0, route.length - 3);
 				route += routeDuplicate;
@@ -160,7 +142,7 @@ var Utils = {
 
 			var tag = slug.replace('/', '-');
 
-			var page = (0, _domCreateElement2['default'])({
+			var page = domCreateElement({
 				selector: 'div',
 				id: 'page-' + tag,
 				styles: 'page page-' + tag
@@ -173,13 +155,13 @@ var Utils = {
 
 			var slug = Utils.biggie.getSlug(req);
 			var page = Utils.biggie.createPage(req, slug);
-
-			_pleaseAjax2['default'].get('/' + slug, {
+			
+			pleaseAjax.get('/' + slug, {
 				success: function success(object) {
-					var $response = (0, _jquery2['default'])(object.data);
+					var $response = $(object.data);
 
-					var title = (0, _jquery2['default'])($response).filter('title').text();
-					var pageHTML = (0, _jquery2['default'])($response).filter('.page-view').find('> .page').html();
+					var title = $($response).filter('title').text();
+					var pageHTML = $($response).filter('.page-view').find('> .page').html();
 
 					document.title = title;
 					page.innerHTML = pageHTML;

@@ -1,11 +1,13 @@
 
-var framework = require('../framework');
 var config = require('../config');
 var utils = require('../utils');
+var componentsLogo = require('../components/logo');
+
 var domClasses = require('dom-classes');
 var domEvents = require('dom-events');
 var domSelect = require('dom-select');
 var jquery = require('jquery');
+
 
 function Default(opt) {
     opt = opt || {};
@@ -37,7 +39,7 @@ Default.prototype = {
                 if (domClasses.has(e.currentTarget, 'no-route')) return;
                 e.preventDefault();
                 var href = e.currentTarget.getAttribute('href');
-                framework.go(href);
+                app.go(href);
             });
         });
 

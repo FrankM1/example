@@ -10,12 +10,13 @@ var UiNav = {
       isInitialized = true;
       var data = {
         links: [
-          { title: 'Landing', path: '/' },
-          { title: 'Home', path: '/home' },
+          { title: 'Home', path: '/' },
+          { title: 'Landing', path: '/landing' },
           { title: 'Docs', path: '/docs' },
           { title: 'Issues', path: '/issues' }
         ]
       };
+      
       this.dom = HBSPlugin(fs.readFileSync('app/ui/nav/index.hbs', 'utf8'), data);
 
       this.clickHandler = this.clickHandler.bind(this);
@@ -23,7 +24,6 @@ var UiNav = {
       this.menu = select('#main-nav');
       this.menuItems = select.all('.main-nav-link', this.dom);
       this.menuItems.forEach = Array.prototype.forEach;
-
 
       this.menuItems.forEach(function (element, index, array) {
         element.addEventListener('click', this.clickHandler);
@@ -41,11 +41,6 @@ var UiNav = {
 
     this.framework.go(link);
   },
-
-  resize: function (width, height) { },
-  animateIn: function (req, done) { done(); },
-  animateOut: function (req, done) { done(); },
-  destroy: function (req, done) { done(); },
 
   setFramework: function (framework) {
     this.framework = framework;
