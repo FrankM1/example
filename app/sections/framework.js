@@ -4,7 +4,7 @@ var bigwheel = require('bigwheel');
 var framework = bigwheel(function (done) {
 	done({
 		overlap: false,
-		initSection: require('./preloader'),
+		//initSection: require('./preloader'),
 		routes: require('./routes')
 	});
 });

@@ -1,116 +1,98 @@
-'use strict';
 
-Object.defineProperty(exports, '__esModule', {
-    value: true
-});
+var framework = require('../framework');
+var config = require('../config');
+var utils = require('../utils');
+var domClasses = require('dom-classes');
+var domEvents = require('dom-events');
+var domSelect = require('dom-select');
+var jquery = require('jquery');
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+function Default(opt) {
+    opt = opt || {};
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    this.isMobile = config.isMobile;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+    this.view = config.$view;
+    this.page = null;
+    this.darkBackground = false;
+}
 
-var _framework = require('../framework');
+Default.prototype = {
+    init: function(req, done) {
+        var view = this.view;
+        
+        this.page = window.prevRoute ? utils.biggie.loadHTML(req, view, this.dataAdded.bind(this, done)) : (0, domSelect)('#js-page-' + this.slug);
 
-var _framework2 = _interopRequireDefault(_framework);
-
-var _config = require('../config');
-
-var _config2 = _interopRequireDefault(_config);
-
-var _utils = require('../utils');
-
-var _utils2 = _interopRequireDefault(_utils);
-
-var _domClasses = require('dom-classes');
-
-var _domClasses2 = _interopRequireDefault(_domClasses);
-
-var _domEvents = require('dom-events');
-
-var _domEvents2 = _interopRequireDefault(_domEvents);
-
-var _domSelect = require('dom-select');
-
-var _domSelect2 = _interopRequireDefault(_domSelect);
-
-var _jquery = require('jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _componentsLogo = require('../components/logo');
-
-var _componentsLogo2 = _interopRequireDefault(_componentsLogo);
-
-var Default = (function () {
-    function Default(opt) {
-        _classCallCheck(this, Default);
-
-        opt = opt || {};
-
-        this.isMobile = _config2['default'].isMobile;
-
-        this.view = _config2['default'].$view;
-        this.page = null;
-        this.darkBackground = false;
-    }
-
-    _createClass(Default, [{
-        key: 'init',
-        value: function init(req, done) {
-
-            var view = this.view;
-            var page = this.page = window.prevRoute ? _utils2['default'].biggie.loadHTML(req, view, this.dataAdded.bind(this, done)) : (0, _domSelect2['default'])('#js-page-' + this.slug);
-
-            if (!window.prevRoute) {
-                _domClasses2['default'].remove(this.page, 'is-hidden');
-                this.dataAdded(done);
-            }
+        if (!window.prevRoute) {
+            domClasses.remove(this.page, 'is-hidden');
+            this.dataAdded(done);
         }
-    }, {
-        key: 'dataAdded',
-        value: function dataAdded() {
+    },
 
-            _utils2['default'].js.sliceArray(_domSelect2['default'].all('a', this.page)).forEach(function (el) {
+    dataAdded: function () {
 
-                _domEvents2['default'].on(el, 'click', function (e) {
-                    if (_domClasses2['default'].has(e.currentTarget, 'no-route')) return;
-                    e.preventDefault();
-                    var href = e.currentTarget.getAttribute('href');
-                    _framework2['default'].go(href);
-                });
+        utils.js.sliceArray(domSelect.all('a', this.page)).forEach(function (el) {
+
+            domEvents.on(el, 'click', function (e) {
+                if (domClasses.has(e.currentTarget, 'no-route')) return;
+                e.preventDefault();
+                var href = e.currentTarget.getAttribute('href');
+                framework.go(href);
             });
+        });
 
-            _componentsLogo2['default'].setDarkBackground(this.darkBackground);
+        componentsLogo.setDarkBackground(this.darkBackground);
 
-            // $('body.scroll-lock').on('scroll', function(e) {
-            //     e.preventDefault();
-            // })
-        }
-    }, {
-        key: 'resize',
-        value: function resize(width, height) {
+        // $('body.scroll-lock').on('scroll', function(e) {
+        //     e.preventDefault();
+        // })
+    },
+    
+    resize: function(width, height) {
+      
+        config.height = height;
+        config.width = width;
 
-            _config2['default'].height = height;
-            _config2['default'].width = width;
-
-            if (window.device.indexOf('is-desktop') > -1) {
-                if (width < 640) {
-                    _domClasses2['default'].add(_config2['default'].$html, 'is-phone');
-                    _domClasses2['default'].remove(_config2['default'].$html, 'is-tablet');
-                } else {
-                    _domClasses2['default'].remove(_config2['default'].$html, 'is-phone');
-                    _domClasses2['default'].remove(_config2['default'].$html, 'is-tablet');
-                }
-
-                _config2['default'].isMobile = (0, _jquery2['default'])('html').hasClass('is-phone');
-                _config2['default'].isTablet = (0, _jquery2['default'])('html').hasClass('is-tablet');
+        if (window.device.indexOf('is-desktop') > -1) {
+            if (width < 640) {
+                domClasses.add(config.$html, 'is-phone');
+                domClasses.remove(config.$html, 'is-tablet');
+            } else {
+                domClasses.remove(config.$html, 'is-phone');
+                domClasses.remove(config.$html, 'is-tablet');
             }
+
+            config.isMobile = (0, jquery)('html').hasClass('is-phone');
+            config.isTablet = (0, jquery)('html').hasClass('is-tablet');
         }
-    }]);
+    },
 
-    return Default;
-})();
+    animateIn: function(req, done) {
+      // In animateIn:
+      // 
+      // 1. animate in your content which was defined in init. 
+      //    eg. change the opacity of your dom elements to 1
 
-exports['default'] = Default;
-module.exports = exports['default'];
+      done();
+    },
+
+    animateOut: function(req, done) {
+      // In animateOut:
+      // 
+      // 1. animate out your content which was defined in init. 
+      //    eg. change the opacity of your dom elements to 0
+
+      done();
+    },
+
+    destroy: function(req, done) {
+      // In destroy:
+      // 
+      // 1. destroy the content which was created in init. 
+      //    eg. remove dom elements from the dom
+
+      done();
+    }
+};
+
+module.exports = Default;
