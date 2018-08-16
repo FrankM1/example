@@ -4,7 +4,6 @@ var remove = require('remove-element');
 var HBSPlugin = require('../../com/plugins/HBSPlugin');
 var animate = require( 'gsap-promise' );
 
-
 var LandingPage = {
   init: function(req, done){
     var data = {

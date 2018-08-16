@@ -1,3 +1,7 @@
+'use strict';
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
 
 var config = require('./config');
 var utils = require('./utils');
@@ -5,26 +9,27 @@ var domCreateElement = require('dom-create-element');
 var domClasses = require('dom-classes');
 var queryDomComponents = require('query-dom-components');
 var pleaseAjax = require('please-ajax');
+var componentsLogo = require('./components/logo');
 var componentsMenu = require('./components/menu');
 var componentsSvg = require('./components/svg');
 var underscore = require('underscore');
 
 TweenLite.defaultEase = Expo.easeOut;
 
-function Preloader() {
-    this.detect();
-    this.view = config.$view;
-    this.slug = 'preloader';
-    this.el = null;
-    this.menu = null;
-    this.svg = null;
-    this.pos = { x: 0, y: 0 };
-    this.template = config.PATH + config.BASE + 'templates/components/' + this.slug + '.html';
-    this.preloaded = onComplete;
-}
+var Preloader = {
 
-Preloader.prototype = {
     init: function (req, done) {
+
+        this.detect();
+        this.view = config.$view;
+        this.slug = 'preloader';
+        this.el = null;
+        this.menu = null;
+        this.svg = null;
+        this.pos = { x: 0, y: 0 };
+        this.template = config.PATH + config.BASE + 'templates/components/' + this.slug + '.html';
+        this.preloaded = onComplete;
+
         var self = this;
 
         this.svg = new componentsSvg();
@@ -32,9 +37,10 @@ Preloader.prototype = {
 
         this.createDOM();
 
-        // done();
+        console.log(this.template);
 
         pleaseAjax.get(this.template, {
+
             success: function success(object) {
                 self.el.innerHTML = object.data;
                 self.dataAdded();
@@ -86,10 +92,10 @@ Preloader.prototype = {
         tl.add(this.preloaded, 2);
         tl.restart();
 
-        this.isMobile && omponentsLogo.animateIn();
+        this.isMobile && componentsLogo.animateIn();
     },
 
-    animateOut: function (req, done) {
+    animateOut : function (req, done) {
         var images = window.$('.work-thumbs__inner');
         var l = images.length;
         var render = underscore.after(l, done);
@@ -119,15 +125,15 @@ Preloader.prototype = {
         tl.staggerTo(this.ui.letter, 1.5, { x: '100%', ease: Power4.easeInOut, clearProps: 'all' }, -0.005, 0);
         tl.staggerTo(this.ui.bg, 1.1, { x: '101%', ease: Power4.easeInOut }, 0.08, .6);
 
-        if (window.innerWidth >= 640) {
+        if(window.innerWidth >= 640) {
             tl.to(this.ui.logo, 1.1, { x: -window.innerWidth / 3, ease: Power4.easeInOut }, .6);
         } else {
             tl.to(this.ui.logo, 1.1, { opacity: 0 }, 0.5);
         }
-
+    
         tl.restart();
-    }
+
+}
 };
 
-exports['default'] = Preloader;
-module.exports = exports['default'];
+module.exports = Preloader;

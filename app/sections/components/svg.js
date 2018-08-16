@@ -16,8 +16,8 @@ var SVG = (function () {
 	function SVG() {
 		_classCallCheck(this, SVG);
 
-		this.root = confi.$body;
-		this.view = confi.$view;
+		this.root = config.$body;
+		this.view = config.$view;
 		this.slug = 'svg';
 		this.template = config.PATH + config.BASE + 'templates/components/' + this.slug + '.html';
 

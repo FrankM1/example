@@ -17,10 +17,10 @@ var app = function () {
   window.$ = Jquery;
 
   sniffer.addClasses(document.documentElement);
-  console.log(document.documentElement.className);
   window.device = document.documentElement.className;
 
   framework.init();
+  console.log(framework);
 
   return framework;
 }
