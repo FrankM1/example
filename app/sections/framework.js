@@ -8,7 +8,7 @@ var home = require('./home/home');
 var docs = require('./docs/');
 var issues = require('./issues/');
 var notfound = require('./notfound/');
-var Preloader = require('./preloader')();
+var Preloader = require('./preloader');
 
 router.addRoute('/', [nav, home] );
 router.addRoute('/landing', [nav, landing] );
