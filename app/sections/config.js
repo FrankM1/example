@@ -18,7 +18,7 @@ var config = {
 
 	$body: document.body,
 	$html: document.documentElement,
-	$view: domSelect('#js-view'),
+	$view: jquery('#js-view').get(0),
 
 	width: window.innerWidth,
 	height: window.innerHeight,

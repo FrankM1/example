@@ -279,6 +279,8 @@ var Home = (function (Default) {
     }, {
         key: 'switchArrows',
         value: function switchArrows(state) {
+            console.log(state);
+            
             if (state == 'kill') $('.round:not(.round-back)').addClass('hidden');
             if (state == 'revive') $('.round:not(.round-back)').removeClass('hidden');
         }

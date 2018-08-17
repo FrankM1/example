@@ -156,6 +156,8 @@ var Utils = {
 			var slug = Utils.biggie.getSlug(req);
 			var page = Utils.biggie.createPage(req, slug);
 			
+			console.log( slug );
+			
 			pleaseAjax.get('/' + slug, {
 				success: function success(object) {
 					var $response = $(object.data);

@@ -14,12 +14,13 @@ router.addRoute('/', [nav, home] );
 router.addRoute('/landing', [nav, landing] );
 router.addRoute('/docs', [nav, docs] );
 router.addRoute('/issues', [nav, issues] );
+router.addRoute('/case/:id', [nav, issues] );
 router.addRoute('404', [nav, notfound] );
 
 var framework = bigwheel(function (done) {
 	done({
 		overlap: false,
-		initSection: Preloader,
+	//	initSection: Preloader,
 		routes: router.routeMap
 	});
 });

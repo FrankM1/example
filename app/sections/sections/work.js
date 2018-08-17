@@ -72,10 +72,10 @@ var Work = (function (_Default) {
 	_createClass(Work, [{
 		key: 'createExtraBound',
 		value: function createExtraBound() {
-			var _this = this;
+			var self = this;
 
 			['initSmooth', 'goProject'].forEach(function (fn) {
-				return _this[fn] = _this[fn].bind(_this);
+				return self[fn] = self[fn].bind(self);
 			});
 		}
 	}, {
@@ -120,19 +120,19 @@ var Work = (function (_Default) {
 	}, {
 		key: 'addEvents',
 		value: function addEvents() {
-			var _this2 = this;
+			var self2 = this;
 
 			_utils2['default'].js.sliceArray(this.ui.el).forEach(function (el) {
-				_domEvents2['default'].on(el, 'click', _this2.goProject);
+				_domEvents2['default'].on(el, 'click', self2.goProject);
 			});
 		}
 	}, {
 		key: 'removeEvents',
 		value: function removeEvents() {
-			var _this3 = this;
+			var self3 = this;
 
 			_utils2['default'].js.sliceArray(this.ui.el).forEach(function (el) {
-				_domEvents2['default'].off(el, 'click', _this3.goProject);
+				_domEvents2['default'].off(el, 'click', self3.goProject);
 			});
 		}
 	}, {
@@ -270,7 +270,7 @@ var Work = (function (_Default) {
 	}, {
 		key: 'destroy',
 		value: function destroy(req, done) {
-			var _this4 = this;
+			var self = this;
 
 			this.smooth && (this.smooth.destroy(), this.smooth = null);
 
@@ -280,7 +280,7 @@ var Work = (function (_Default) {
 
 			var tl = new TimelineMax({ paused: true, onComplete: function onComplete() {
 					done();
-					_this4.view.removeChild(_this4.page);
+					self.view.removeChild(self.page);
 				} });
 
 			if (req.route.indexOf('case') !== -1 || req.route == '/cases' || req.route == '/culture' || req.route == '/contact') {

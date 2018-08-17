@@ -20,7 +20,6 @@ var app = function () {
   window.device = document.documentElement.className;
 
   framework.init();
-  console.log(framework);
 
   return framework;
 }
